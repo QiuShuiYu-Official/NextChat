@@ -303,11 +303,13 @@ export function getTimeoutMSByModel(model: string) {
     model.startsWith("dalle") ||
     model.startsWith("o1") ||
     model.startsWith("o3") ||
-    model.includes("deepseek-r") ||
+    model.includes("deepseek") ||
     model.includes("-thinking")
   )
-    return REQUEST_TIMEOUT_MS_FOR_THINKING;
-  return REQUEST_TIMEOUT_MS;
+    // 900000毫秒 = 15分钟！写2万字都完全够
+    return 900000;
+  // 默认也给2分钟，比原来的90秒长
+  return 120000;
 }
 
 export function getModelSizes(model: string): ModelSize[] {
